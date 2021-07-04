@@ -15,11 +15,11 @@ class App extends React.Component {
 		// dispatch action
 		store.dispatch(addMovies(data));
 
-		console.log(store.getState());
+		console.log('STATE', store.getState());
 	}
 	isMovieFavourite = (movie) => {
-        const {favourites} = this.props.store.getState();
-        const index = favourites.indexOf(movie);
+		const {movies} = this.props.store.getState();
+        const index = movies.favourites.indexOf(movie);
         if(index !== -1){
             return true;
         }
@@ -29,8 +29,8 @@ class App extends React.Component {
 		this.props.store.dispatch(setShowFavourites(val));
 	}
 	render () {
-		console.log('RENDER');
-		const {list, favourites, showFavourites}  = this.props.store.getState(); // list, favourites
+		const {movies} = this.props.store.getState(); // { movies: {}, search: {} }
+		const {list, favourites, showFavourites} = movies;
 		console.log(this.props.store.getState());
 
 		const displayMovies = showFavourites ? favourites : list;
