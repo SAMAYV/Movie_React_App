@@ -70,6 +70,7 @@ export function search(state = initialSearchState, action) {
     }
 }
 
+// eslint-disable-next-line
 const initialRootState = {
     movies: initialMoviesState,
     search: initialSearchState
