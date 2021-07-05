@@ -40,7 +40,7 @@ export function addMovieToList(movie) {
 export function handleMovieSearch(movie) {
     const url = `https://omdbapi.com/?apikey=3ca5df7&t=${movie}`;
     return function(dispatch) {
-        fetch(url)
+        fetch(url) // returns a promise
         .then(response => response.json())
         .then(movie => {
             console.log('movie', movie);
