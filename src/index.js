@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import App from './components/App';
 import './index.css';
 import rootReducer from './reducers';
+import thunk from 'redux-thunk';
 
 // logger(obj)(next)(action)
 // const logger = function({dispatch, getState}) {
@@ -19,11 +20,23 @@ import rootReducer from './reducers';
 
 const logger = ({dispatch, getState}) => (next) => (action) => {
 	// write middleware code
-	console.log('ACTION TYPE', action.type);
+	if(typeof action !== 'function'){
+		console.log('ACTION TYPE', action.type);
+	}
+	// passing action to reducer
 	next(action);
 }
 
-const store = createStore(rootReducer, applyMiddleware(logger));
+// const thunk = ({dispatch, getState}) => (next) => (action) => {
+// 	// write middleware code
+// 	if(typeof action === 'function'){
+// 		action(dispatch);
+// 		return;
+// 	}
+// 	next(action);
+// }
+
+const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 
 ReactDOM.render(
 	<React.StrictMode>
