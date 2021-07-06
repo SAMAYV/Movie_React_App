@@ -1,12 +1,12 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
+import React from "react";
+import { Provider } from "react-redux";
+import ReactDOM from "react-dom";
+import { createStore, applyMiddleware } from "redux";
 
-import App from './components/App';
-import './index.css';
-import rootReducer from './reducers';
-import thunk from 'redux-thunk';
+import App from "./components/App";
+import "./index.css";
+import rootReducer from "./reducers";
+import thunk from "redux-thunk";
 
 // logger(obj)(next)(action)
 // const logger = function({dispatch, getState}) {
@@ -19,14 +19,17 @@ import thunk from 'redux-thunk';
 // 	}
 // }
 
-const logger = ({dispatch, getState}) => (next) => (action) => {
-	// write middleware code
-	if(typeof action !== 'function'){
-		console.log('ACTION TYPE', action.type);
-	}
-	// passing action to reducer
-	next(action);
-}
+const logger =
+  ({ dispatch, getState }) =>
+  (next) =>
+  (action) => {
+    // write middleware code
+    if (typeof action !== "function") {
+      console.log("ACTION TYPE", action.type);
+    }
+    // passing action to reducer
+    next(action);
+  };
 
 // const thunk = ({dispatch, getState}) => (next) => (action) => {
 // 	// write middleware code
@@ -62,7 +65,7 @@ const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 // 				this.unsubscribe();
 // 			}
 // 			render() {
-// 				const {store} = this.props; 
+// 				const {store} = this.props;
 // 				const state = store.getState();
 // 				const dataToBePassedAsProps = callback(state);
 // 				return <Component {...dataToBePassedAsProps} dispatch={store.dispatch} />
@@ -79,14 +82,13 @@ const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 // 		}
 // 		return ConnectedComponentWrapper;
 // 	}
-// } 
+// }
 
 ReactDOM.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<App store={store}/>
-		</Provider>
-	</React.StrictMode>,
-	document.getElementById('root')
+  <React.StrictMode>
+    <Provider store={store}>
+      <App store={store} />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
-
